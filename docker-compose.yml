@@ -1,0 +1,34 @@
+version: "3.3"
+services:
+  #bell-redis:
+  #  image: redis:7.0.8
+  #  hostname: bell-redis
+  #  expose:
+  #    - 6379
+  bell-backend:
+    image: bell-project-backend:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    hostname: bell-backend
+    container_name: bell-backend
+    user: 387276:64000
+    expose:
+      - 3031
+      - 1717
+    command: ["uwsgi", "--ini", "/opt/app/myapp/uwsgi.ini"]
+    volumes:
+       - ./myapp:/opt/app/myapp
+    #depends_on:
+    #  - bell-redis
+  bell-nginx:
+    container_name: bell-nginx
+    hostname: bell-nginx
+    image: nginx:1.23.3
+    ports:
+      - 8443:443
+    volumes:
+       #- ./dist:/opt/river/myapp
+       - ./nginx-config:/etc/nginx/conf.d
+    depends_on:
+      - bell-backend
