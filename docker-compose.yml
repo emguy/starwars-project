@@ -28,7 +28,7 @@ services:
     ports:
       - 8443:443
     volumes:
-       #- ./dist:/opt/river/myapp
+       - ./dist:/opt/river/myapp
        - ./nginx-config:/etc/nginx/conf.d
     depends_on:
       - bell-backend

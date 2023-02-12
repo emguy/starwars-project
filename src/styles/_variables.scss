@@ -1,0 +1,27 @@
+$font-stack-sans: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+$font-stack-serif: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+$font-stack-mono: "Courier New", Courier, monospace;
+
+$primary-bg-color: #cce0c1;
+$primary-bg-color-active: lightsteelblue;
+
+$secondary-bg-color-active: #476ead;
+
+$header-height: 56px;
+
+$table-head-bg-color: #339933;
+$table-row-bg-color-1: #cce0c1;
+$table-row-bg-color-2: #ecf9f2;
+
+$active-text-color: #3366cc;
+
+@mixin disable-text-select {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+}
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

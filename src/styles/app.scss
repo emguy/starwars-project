@@ -1,0 +1,51 @@
+@import "@/styles/_variables.scss";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+label,
+select,
+input {
+  font-size: 14px;
+}
+
+div.table-row {
+  display: flex;
+  padding: 2px 10px 2px 10px;
+  font-size: 14px;
+  width: 100%;
+
+  &:nth-child(odd) {
+    background: $table-row-bg-color-2;
+    border-left: solid 4px $table-row-bg-color-2;
+  }
+
+  &:nth-child(even) {
+    background: $table-row-bg-color-1;
+    border-left: solid 4px $table-row-bg-color-1;
+  }
+
+  &.table-head {
+    background: $table-head-bg-color;
+    color: white;
+    font-weight: bold;
+    border-radius: 3px 3px 0 0;
+    border-left: solid 4px $table-head-bg-color;
+  }
+
+  &:hover {
+    border-left: solid 4px $table-head-bg-color;
+  }
+}

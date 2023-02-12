@@ -1,60 +1,28 @@
 import strawberry
-import requests
 import typing
-import json
+import handler
 
-PERSON_SEARCH_ENDPOINT = "https://swapi.dev/api/people?search="
-
-PERSON_CACHE = {
-  "Foo barA": {
-    "films": [
-      "film1",
-      "film2",
-      "film3",
-    ],
-    "vehicles": [
-     ]
-  },
-  "Foo barB": {
-    "films": [
-      "film1",
-      "film2",
-      "film3",
-    ]
-  }
-}
 
 @strawberry.type
 class Person:
   name: str
-
-  @strawberry.field
-  def films(self) -> typing.List[str]:
-    return [_title for _title in PERSON_CACHE[self.name]['films']]
+  films: typing.List[str]
+  vehicles: typing.List[str]
 
 
 @strawberry.type
 class Query:
   @strawberry.field
-  def name(self, text: str) -> str:
+  def search_text(self, text: str) -> str:
     return text
 
   @strawberry.field
-  def persons(self) -> typing.List[Person]:
-    return [Person(name=_name) for _name in PERSON_CACHE.keys()] 
+  def persons(self, info: strawberry.types.Info) -> typing.List[Person]:
+    return [ Person(name=obj['name'],
+             films=obj['films'],
+             vehicles=obj['vehicles'])
+             for obj in handler.get_cached_result(
+                info.variable_values['text']) ]
+
 
 schema = strawberry.Schema(query=Query)
-
-if __name__ == '__main__':
-  query = '''
-  {
-    name(text:"foo")
-    persons {
-      name
-      films
-    }
-  }
-  '''
-  
-  result = schema.execute_sync(query)
-  print(json.dumps(result.data))
