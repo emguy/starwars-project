@@ -7,11 +7,29 @@ SEARCH_ENDPOINT = 'https://swapi.dev/api/people?search={}'
 PREFIX_SEARCH_TEXT = 'search%%'
 
 
+# The following are the patterns that we use for caching
+#
+# 1 Search result, for example 'foobar'
+#
+#   base64('search%%foobar') => ['https://swapi.dev/api/people/6/',
+#                                'https://swapi.dev/api/people/12/']
+#
+# 2 Entity data
+#
+#   base64('https://swapi.dev/api/people/6/') => '{the json data response}'
+#   base64('https://swapi.dev/api/film/2/') => '{the json data response}'
+#   base64('https://swapi.dev/api/vehicles/1/') => '{the json data response}'
+
+
+# call the REST endpoint
 def _call_api(url: str) -> object:
   r = requests.get(url, timeout=3)
   r.raise_for_status()
   return r.json()
 
+
+# get the entity for people, film, or vehicles through its url
+# call the remote endpoint only if it is not locally cached
 def _get_entity(url: str) -> object:
   entity = cache.get(url)
   if not entity:
@@ -19,6 +37,9 @@ def _get_entity(url: str) -> object:
     cache.put(url, entity)
   return entity
 
+
+# call the search endpoint and cache all the people entities
+# from the response
 def _search_remote_data(search_text: str) -> list:
   data = {'next': SEARCH_ENDPOINT.format(
          urllib.parse.quote(search_text.strip()))}
@@ -31,6 +52,10 @@ def _search_remote_data(search_text: str) -> list:
   cache.put(PREFIX_SEARCH_TEXT + search_text.strip(), person_list)
   return person_list
 
+
+# this is the only exposed function. It attempts to load the search results
+# from the local cache and builds the response data. It calls
+# _search_remote_data only if the search result is not previously cached.
 def get_cached_result(search_text: str) -> list:
   person_list = cache.get(PREFIX_SEARCH_TEXT + search_text.strip())
   if person_list is None:
