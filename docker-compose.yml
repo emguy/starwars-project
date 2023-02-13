@@ -1,10 +1,10 @@
 version: "3.3"
 services:
-  #bell-redis:
-  #  image: redis:7.0.8
-  #  hostname: bell-redis
-  #  expose:
-  #    - 6379
+  bell-redis:
+    image: redis:7.0.8
+    hostname: bell-redis
+    expose:
+      - 6379
   bell-backend:
     image: bell-project-backend:latest
     build:
@@ -19,8 +19,8 @@ services:
     command: ["uwsgi", "--ini", "/opt/app/myapp/uwsgi.ini"]
     volumes:
        - ./myapp:/opt/app/myapp
-    #depends_on:
-    #  - bell-redis
+    depends_on:
+      - bell-redis
   bell-nginx:
     container_name: bell-nginx
     hostname: bell-nginx

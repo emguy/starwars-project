@@ -25,6 +25,8 @@ module.exports = {
     'generator-star-spacing': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    // allow <p>foobar</p>
+    'vue/singleline-html-element-content-newline': 'off',
     'max-len': ['error', 80, 2, {
       ignoreUrls: true,
       ignoreRegExpLiterals: true,

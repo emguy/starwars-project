@@ -9,7 +9,7 @@ def get_connection():
     return redis.Redis(host='0.0.0.0', port=6379, db=0)
   if not hasattr(flask.current_app, 'redis_pool'):
     flask.current_app.redis_pool = \
-        redis.ConnectionPool(host='0.0.0.0', port=6379, db=0)
+        redis.ConnectionPool(host='bell-redis', port=6379, db=0)
   return redis.Redis(connection_pool=flask.current_app.redis_pool)
 
 

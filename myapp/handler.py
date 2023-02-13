@@ -33,7 +33,12 @@ def _search_remote_data(search_text: str) -> list:
 
 def get_cached_result(search_text: str) -> list:
   person_list = cache.get(PREFIX_SEARCH_TEXT + search_text.strip())
-  if not person_list:
+  if person_list is None:
+    prev_list = cache.get(PREFIX_SEARCH_TEXT + search_text.strip()[0:-1])
+    if prev_list is not None and len(prev_list) == 0:
+      # we return empty list for 'foobar' without calling remote search api
+      # provided that the cached result for 'fooba' is cached and is empty
+      return []
     person_list = _search_remote_data(search_text)
   result_list = []
   for person_url in person_list:

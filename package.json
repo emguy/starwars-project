@@ -6,7 +6,7 @@
   "author": "Yu Zhang <emguy2000@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --mode nginx",
+    "build": "vue-cli-service build --mode production",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --no-fix .",
     "get-version": "echo $npm_package_version"

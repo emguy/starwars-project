@@ -146,7 +146,7 @@ export default {
       & div.subentry {
         padding-left: 10px;
       }
-      
+
       & div.top {
         height: 160px;
       }
