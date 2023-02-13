@@ -23,7 +23,7 @@ PREFIX_SEARCH_TEXT = 'search%%'
 
 # call the REST endpoint
 def _call_api(url: str) -> object:
-  r = requests.get(url, timeout=3)
+  r = requests.get(url, timeout=10)
   r.raise_for_status()
   return r.json()
 
