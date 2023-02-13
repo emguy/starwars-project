@@ -31,7 +31,7 @@ docker-compose up
 
 ## Setup the development environment
 
-[Python](https://www.python.org/downloads/) v3.10 is required the backend development.
+[Python](https://www.python.org/downloads/) v3.10 is required for the backend development.
 
 Run the following command to bring up the development server for the backend.
 
@@ -39,7 +39,7 @@ Run the following command to bring up the development server for the backend.
 pip install -r myapp/requirements.txt
 cd myapp && python app.py
 ```
-Run the following command to bring up the development server for the frontend.
+Run the following commands to bring up the development server for the frontend.
 
 ```
 npm install
