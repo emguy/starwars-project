@@ -1,4 +1,4 @@
-# Bell Project App
+# Star Wars Project
 
 This demo application is created using the web-ui framework
 [vuejs](https://vuejs.org/) v2.x, the python backend framework
@@ -44,6 +44,10 @@ Run the following command to start the application.
 ```
 docker-compose up
 ```
+
+Browse and verify this web application through the url
+[https://localhost:8443/myapp/](https://localhost:8443/myapp/). You need to
+accept the self-signed certificate when the browser asks.
 
 ## Setup the development environment
 
