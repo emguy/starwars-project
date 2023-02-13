@@ -1,9 +1,10 @@
 # Bell Project App
 
-This demo application is created using [vuejs](https://vuejs.org/) v2.x,
-[flask](https://flask.palletsprojects.com/), and [redis](https://redis.com/).
-[nginx](https://www.nginx.com/) is the proxy server for hosting both the
-frontend and the backend.
+This demo application is created using the web-ui framework
+[vuejs](https://vuejs.org/) v2.x, the python backend framework
+[flask](https://flask.palletsprojects.com/), and [redis](https://redis.com/)
+for server-side caching. [Nginx](https://www.nginx.com/) is the proxy server
+for hosting both the frontend and the backend.
 
 ## Prerequisite
 
@@ -21,6 +22,8 @@ The following pre-requisites are required to build and run this application.
 - The file `docker-compose.yaml` is the docker-compose file for running the whole application. See the next section.
 
 ## Setup the production environment
+
+The following are the steps to run this web application.
 
 ### Build the docker image and the UI assets
 
